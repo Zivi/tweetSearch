@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootswatch/2.3.1/spacelab/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="tweetSearch.css">
+
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  
+  <title>Tweet Search</title>
+</head>
+<body ng-controller="tweets">
+  <div class="container-fluid document">
+    <div class="row-fluid">
+      <div class="span3">
+        Search: <input ng-model="query">
+      </div>
+
+      <div class="span8">
+        <ul class="tweets">
+          <li ng-repeat="tweet in tweets" ng-class="{'been-read':tweet.read}">
+            <div class="row">
+              <div class="span1 checkbox">
+                <input type="checkbox" ng-model="tweet.read" ng-click="read(tweet)">
+              </div>
+              <div class="span1">
+                <img class="pic" ng-src="{{tweet.profile_image_url}}">
+              </div>
+              
+              <div class="span6">
+                <p class="user">{{tweet.from_user}}</p>
+                <p class="text">{{tweet.text}}</p>
+                <p class="datetime">{{tweet.created_at}}</p>
+              </div>
+              
+
+            </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="tweetSearch.js"></script>
+
+</body>
+</html>
+
+
