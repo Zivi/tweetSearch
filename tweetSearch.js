@@ -4,7 +4,7 @@ function tweets($scope, $http) {
   $scope.$watch("query", function () {
       $http.jsonp("http://search.twitter.com/search.json?callback=JSON_CALLBACK&q=" + $scope.query).then(function(results){
       //will be called when get is finished
-      //$scope.tweets = results.data.results.slice(0, 5);
+      $scope.tweets = results.data.results;
 
       var readTweets = JSON.parse(localStorage.readTweets);
       for (var i = 0; i < $scope.tweets.length; i++) {
@@ -19,7 +19,12 @@ function tweets($scope, $http) {
 
   $scope.read = function(tweet) {
     var readTweets = JSON.parse(localStorage.readTweets);
-    readTweets.push(tweet.id);
+    if (tweet.read) {
+      readTweets.push(tweet.id);
+    } else {
+      var index = readTweets.indexOf(tweet.id);
+      readTweets.splice(index, 1);
+    }
     localStorage.readTweets = JSON.stringify(readTweets);
   }
 
