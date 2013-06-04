@@ -2,7 +2,7 @@ function tweets($scope, $http) {
   localStorage.readTweets = localStorage.readTweets || JSON.stringify([]);
 
   $scope.$watch("query", function () {
-      $http.jsonp("http://search.twitter.com/search.json?callback=JSON_CALLBACK&q=" + $scope.query).then(function(results){
+      $http.jsonp("http://search.twitter.com/search.json?callback=JSON_CALLBACK&q=" + encodeURIComponent($scope.query)).then(function(results){
         //will be called when get is finished
         $scope.tweets = results.data.results;
 
