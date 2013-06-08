@@ -2,6 +2,7 @@ function tweets($scope, $http) {
   localStorage.readTweets = localStorage.readTweets || JSON.stringify([]);
 
   $scope.$watch("query", function () {
+    //api has been deprecated, update API call
       $http.jsonp("http://search.twitter.com/search.json?callback=JSON_CALLBACK&q=" + encodeURIComponent($scope.query)).then(function(results){
         //will be called when get is finished
         $scope.tweets = results.data.results;
